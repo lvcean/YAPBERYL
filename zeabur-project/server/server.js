@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Serve static files from the 'client' directory
-app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.join(process.cwd(), '../client')));
 
 // Database Connection
 // Zeabur automatically injects these environment variables for MySQL services
@@ -124,3 +124,4 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
