@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Serve static files from the 'client' directory
-app.use(express.static(path.join(process.cwd(), '../client')));
+app.use(express.static(path.join(__dirname, 'client')));
 
 // Database Connection
 // Zeabur automatically injects these environment variables for MySQL services
@@ -30,11 +30,11 @@ async function initDB() {
     try {
         // Create connection pool
         pool = mysql.createPool(dbConfig);
-        
+
         // Test connection
         const connection = await pool.getConnection();
         console.log('Connected to MySQL database!');
-        
+
         // Initialize Table if not exists
         await connection.query(`
             CREATE TABLE IF NOT EXISTS device_logs (
@@ -59,14 +59,14 @@ initDB();
 // API: Login (Simulated)
 app.post('/api/login', (req, res) => {
     const { phone, code } = req.body;
-    
+
     // Simulate +86 11-digit phone validation
     const phoneRegex = /^1[3-9]\d{9}$/;
-    
+
     if (!phone || !phoneRegex.test(phone)) {
         return res.status(400).json({ success: false, message: '请输入有效的11位中国手机号' });
     }
-    
+
     // In a real app, you would verify the code via SMS. 
     // Here we accept any code that is 4 digits.
     if (!code || code.length !== 4) {
@@ -110,9 +110,11 @@ app.get('/api/logs', async (req, res) => {
             res.status(500).json({ success: false, error: err.message });
         }
     } else {
-        res.json({ success: true, data: [
-            { id: 0, device_id: 'mock-device-01', ip_address: '127.0.0.1', log_message: 'Database not connected (Mock Data)', created_at: new Date() }
-        ]});
+        res.json({
+            success: true, data: [
+                { id: 0, device_id: 'mock-device-01', ip_address: '127.0.0.1', log_message: 'Database not connected (Mock Data)', created_at: new Date() }
+            ]
+        });
     }
 });
 
@@ -124,4 +126,3 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
-

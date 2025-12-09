@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My APK Project - Connect Globally</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="brand">NEXUS APP</div>
+        <nav>
+            <a href="index.html">首页</a>
+            <a href="#" id="nav-login" class="btn-login">登录</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>下一代数据互联体验</h1>
+            <p class="subtitle">极速连接 · 全球节点 · 实时同步。即刻下载体验。</p>
+            <a href="#" class="download-btn" onclick="alert('APK文件尚未上传，请先部署后端！')">下载 Android 客户端</a>
+        </section>
+
+        <section class="dashboard">
+            <div class="card">
+                <h2>
+                    <span class="status-indicator"></span>
+                    实时数据监控 (Live Data)
+                </h2>
+                <div id="log-list" class="log-list">
+                    <div class="log-item">正在连接服务器获取数据...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        &copy; 2024 Nexus App. Proudly deployed on Zeabur.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
